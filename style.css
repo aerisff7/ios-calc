@@ -1,0 +1,142 @@
+/* =========================================================
+   1. Design Variables & Global Resets
+   ========================================================= */
+:root {
+  --bg-app: #0a0a0c;          /* Deep dark background */
+  --bg-calculator: #1c1c1e;   /* Matte dark-gray body */
+  --display-text: #ffffff;    /* Primary text */
+  --display-subtext: #8e8e93; /* Muted secondary text */
+
+  /* Button Themes */
+  --btn-num-bg: #2c2c2e;      /* Dark gray for number keys */
+  --btn-num-hover: #3a3a3c;
+  --btn-func-bg: #505054;     /* Medium gray for top functions */
+  --btn-func-hover: #636366;
+  --btn-op-bg: #ff9f0a;       /* iOS Accent orange */
+  --btn-op-hover: #ffb340;
+  --btn-op-active: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  user-select: none; /* Prevents text selection on rapid button clicks */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-app);
+  padding: 16px;
+}
+
+/* =========================================================
+   2. Calculator Container & Screen
+   ========================================================= */
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  background-color: var(--bg-calculator);
+  border-radius: 36px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.08); /* Subtle glass border */
+}
+
+/* Display Screen */
+.display {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 110px;
+  padding: 10px 14px 18px 14px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.previous-operand {
+  color: var(--display-subtext);
+  font-size: 1.15rem;
+  font-weight: 400;
+  min-height: 24px;
+}
+
+.current-operand {
+  color: var(--display-text);
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  transition: font-size 0.15s ease;
+}
+
+/* =========================================================
+   3. CSS Grid Keypad
+   ========================================================= */
+.buttons-grid {
+  display: grid;
+  /* 4 equal-width columns */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Standard Button Base */
+.btn {
+  height: 64px;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.15s ease, transform 0.08s ease;
+}
+
+/* Tactile feedback on press */
+.btn:active {
+  transform: scale(0.94);
+}
+
+/* Number Buttons */
+.btn-number {
+  background-color: var(--btn-num-bg);
+  color: #ffffff;
+}
+.btn-number:hover {
+  background-color: var(--btn-num-hover);
+}
+
+/* Top Modifier Keys (AC, ±, %) */
+.btn-function {
+  background-color: var(--btn-func-bg);
+  color: #ffffff;
+}
+.btn-function:hover {
+  background-color: var(--btn-func-hover);
+}
+
+/* Operator Keys (÷, ×, -, +, =) */
+.btn-operator {
+  background-color: var(--btn-op-bg);
+  color: #ffffff;
+  font-size: 1.7rem;
+}
+.btn-operator:hover {
+  background-color: var(--btn-op-hover);
+}
+
+/* The '0' button spans 2 columns for the classic pill look */
+.btn-zero {
+  grid-column: span 2;
+  border-radius: 34px;
+  justify-content: flex-start;
+  padding-left: 26px;
+}
+
